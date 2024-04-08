@@ -487,17 +487,8 @@ def make_macos_multi_arch_build(cmake_args):
   global g_target_architectures
   # build multiple architectures
   current_folder = os.getcwd()
-  threads = []
   for arch in g_target_architectures:
-    t = threading.Thread(target=make_macos_arch, args=(arch, cmake_args))
-    t.start()
-    threads.append(t)
-    logging.info("=-=-=-=-=  Started a build for %s", arch)
-
-  for t in threads:
-    t.join()
-
-  logging.info("=-=-=-=-=  All the threads are done")
+    make_macos_arch(arch, cmake_args)
   
   # Merge the different zip files together, using lipo on the bundle files
   zip_base_name = ""
