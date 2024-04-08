@@ -492,9 +492,12 @@ def make_macos_multi_arch_build(cmake_args):
     t = threading.Thread(target=make_macos_arch, args=(arch, cmake_args))
     t.start()
     threads.append(t)
+    logging.info("=-=-=-=-=  Started a build for %s", arch)
 
   for t in threads:
     t.join()
+
+  logging.info("=-=-=-=-=  All the threads are done")
   
   # Merge the different zip files together, using lipo on the bundle files
   zip_base_name = ""
@@ -838,7 +841,11 @@ def main(argv):
 
     gen_documentation_zip()
 
+  logging.info("=-=-=-=-=  Finished with the build?")
+
   os.chdir(source_path)
+
+  logging.info("=-=-=-=-=  Actually finished with the build")
 
 
 if __name__ == '__main__':
