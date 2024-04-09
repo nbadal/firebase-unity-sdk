@@ -474,8 +474,11 @@ def make_macos_arch(arch, cmake_args):
     os.makedirs(arch)
   build_dir = os.path.join(os.getcwd(), arch)
   cmake_args.append('-DCMAKE_OSX_ARCHITECTURES='+arch)
+  logging.info("=-=-=  About to call cmake configure for %s", arch)
   subprocess.call(cmake_args, cwd=build_dir)
+  logging.info("=-=-=  About to call cmake build for %s", arch)
   subprocess.call('make', cwd=build_dir)
+  logging.info("=-=-=  About to call cpack for %s", arch)
   subprocess.call(['cpack', '.'], cwd=build_dir)
 
 def make_macos_multi_arch_build(cmake_args):
