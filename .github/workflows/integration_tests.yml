@@ -194,7 +194,7 @@ jobs:
       - name: Force Java 17 (macOS)
         if: startsWith(matrix.os, 'macos')
         shell: bash
-        run: echo "JAVA_HOME=${JAVA_HOME_17_X64}" >> $GITHUB_ENV
+        run: echo "JAVA_HOME=${JAVA_HOME_8_X64}" >> $GITHUB_ENV
       - name: setup Xcode version
         if: runner.os == 'macOS'
         run: sudo xcode-select -s /Applications/Xcode_${{ env.xcodeVersion }}.app/Contents/Developer
